@@ -1,5 +1,7 @@
-from PyQt5.QtWidgets import QWidget, QApplication
-
+from PyQt5.QtGui import QIcon, QBrush, QPen, QColor, QPainter, QPalette
+from PyQt5 import QtCore
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QGraphicsView, QGraphicsScene, QGraphicsEllipseItem, QGraphicsTextItem, QLineEdit, QPushButton, QHBoxLayout, QLabel
+import sys
 
 class Node:
     """
@@ -22,7 +24,30 @@ class BinarySearchTree(QWidget):
         Конструктор
         '''
         super().__init__()
+        self.initUI()
         self.root = None
+
+    def initUI(self):
+        self.resize(1000,800)
+        self.setWindowTitle("Binary Search Tree")
+        pal = self.palette()
+
+        pal.setColor(QPalette.Normal, QPalette.Window, QColor("#008800"))
+        pal.setColor(QPalette.Inactive, QPalette.Window, QColor("#ff0000"))
+
+        self.setPalette(pal)
+
+        label = QLabel("Text")
+        label.setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
+        label.setStyleSheet("background-color: #ffffff;")
+        label.setAutoFillBackground(True)
+        vbox = QVBoxLayout()
+        vbox.addWidget(label)
+        self.setLayout(vbox)
+
+
+
+
 
     def getRoot(self):
         '''
@@ -113,6 +138,10 @@ class BinarySearchTree(QWidget):
 
 
 if __name__ == "__main__":
+    app = QApplication(sys.argv)
     tree = BinarySearchTree()
+
+    tree.show()
+    sys.exit(app.exec())
 
 
